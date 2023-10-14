@@ -4,10 +4,10 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import indexRoutes from './routes/index.js';
-import usersRoutes from './routes/users.js';
 import path from 'node:path';
-
+import indexRoute from './routes/index.js';
+import usersRoute from './routes/users.js';
+import testRoute from './routes/test.js';
 
 const app = express();
 const dirname = path.resolve('.');
@@ -22,12 +22,12 @@ app.use(cors());
 app.use(cookieParser());
 app.use(logger('dev'));
 
-app.use('/', indexRoutes);
-app.use('/api', usersRoutes);
+app.use('/', indexRoute);
+app.use('/api', usersRoute);
+app.use('/', testRoute);
 
 app.use((req, res) => {
   res.status(404).render('error');
 });
-
 
 export default app;
